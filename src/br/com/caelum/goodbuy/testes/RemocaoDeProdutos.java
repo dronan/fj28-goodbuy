@@ -1,26 +1,24 @@
 package br.com.caelum.goodbuy.testes;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.AnnotationConfiguration;
 
+import br.com.caelum.goodbuy.dao.ProdutoDao;
+import br.com.caelum.goodbuy.infra.CriadorDeSession;
 import br.com.caelum.goodbuy.modelo.Produto;
 
 public class RemocaoDeProdutos {
 	public static void main(String[] args) {
 		
-		AnnotationConfiguration configuration = new AnnotationConfiguration();
-		configuration.configure();
+		Session session = CriadorDeSession.getSession();
 		
-		SessionFactory factory = configuration.buildSessionFactory();
-		Session session = factory.openSession();
+		Produto produto = removeProduto(session);
 		
+		new ProdutoDao().remove(produto);
+		
+	}
+
+	private static Produto removeProduto(Session session) {
 		Produto produto = (Produto) session.load(Produto.class, 2L);
-		
-		Transaction tx = session.beginTransaction();
-		session.delete(produto);
-		tx.commit();
-		
+		return produto;
 	}
 }

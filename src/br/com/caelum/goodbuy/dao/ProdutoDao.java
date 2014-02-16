@@ -19,4 +19,17 @@ public class ProdutoDao {
 		tx.commit();
 	}
 
+	public void altera(Produto produto) {
+		Transaction tx = session.beginTransaction();
+		produto.setPreco(500.0);
+		session.update(produto);
+		tx.commit();
+	}
+
+	public  void remove(Produto produto) {
+		Transaction tx = session.beginTransaction();
+		session.delete(produto);
+		tx.commit();
+	}
+
 }
