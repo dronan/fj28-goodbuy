@@ -9,22 +9,36 @@ import br.com.caelum.goodbuy.modelo.Produto;
 @SuppressWarnings("deprecation")
 public class AdicaoDeProduto {
 	public static void main(String[] args) {
+		
+		Session session = getSession();
 
-		AnnotationConfiguration configuration = new AnnotationConfiguration();
-		configuration.configure();
+		Produto produto = criaProduto();
 
-		SessionFactory factory = configuration.buildSessionFactory();
-		Session session = factory.openSession();
+		gravaProduto(session, produto);
 
+	}
+
+	private static void gravaProduto(Session session, Produto produto) {
+		Transaction tx = session.beginTransaction();
+		session.save(produto);
+		tx.commit();
+	}
+
+	private static Produto criaProduto() {
 		Produto produto = new Produto();
 
 		produto.setNome("Cadeira");
 		produto.setDescricao("Uma cadeira qualquer");
 		produto.setPreco(5.0);
+		return produto;
+	}
 
-		Transaction tx = session.beginTransaction();
-		session.save(produto);
-		tx.commit();
+	private static Session getSession() {
+		AnnotationConfiguration configuration = new AnnotationConfiguration();
+		configuration.configure();
 
+		SessionFactory factory = configuration.buildSessionFactory();
+		Session session = factory.openSession();
+		return session;
 	}
 }

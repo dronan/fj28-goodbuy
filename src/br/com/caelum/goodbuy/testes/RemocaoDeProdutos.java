@@ -22,6 +22,5 @@ public class RemocaoDeProdutos {
 		session.delete(produto);
 		tx.commit();
 		
-		
 	}
 }
