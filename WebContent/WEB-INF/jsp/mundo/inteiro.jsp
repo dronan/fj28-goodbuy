@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Mensagem vinda da lógica: ${string}
+Numero inteiro: ${integer}
 </body>
 </html>
