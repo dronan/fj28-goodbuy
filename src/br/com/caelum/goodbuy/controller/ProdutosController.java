@@ -39,5 +39,10 @@ public class ProdutosController {
 		dao.atualiza(produto);
 		result.redirectTo(this).lista();
 	}
-
+	
+	public void remove(Long id){
+		Produto produto = dao.carrega(id);
+		dao.remove(produto);
+		result.redirectTo(this).lista();
+	}
 }
