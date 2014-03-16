@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import br.com.caelum.goodbuy.infra.CriadorDeSession;
 import br.com.caelum.goodbuy.modelo.Produto;
 import br.com.caelum.vraptor.ioc.Component;
 
@@ -14,8 +13,8 @@ public class ProdutoDao {
 
 	private final Session session;
 
-	public ProdutoDao() {
-		this.session = CriadorDeSession.getSession();
+	public ProdutoDao(Session session) {
+		this.session = session;
 	}
 
 	public void salva(Produto produto) {

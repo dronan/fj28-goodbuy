@@ -2,15 +2,20 @@ package br.com.caelum.goodbuy.infra;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
-public class CriadorDeSession {
+import br.com.caelum.vraptor.ioc.Component;
+import br.com.caelum.vraptor.ioc.ComponentFactory;
 
-	public static Session getSession() {
-		AnnotationConfiguration configuration = new AnnotationConfiguration();
-		configuration.configure();
-	
-		SessionFactory factory = configuration.buildSessionFactory();
+@Component
+public class CriadorDeSession implements ComponentFactory<Session> {
+
+	private final SessionFactory factory;
+
+	public CriadorDeSession(SessionFactory factory) {
+		this.factory = factory;
+	}
+
+	public Session getInstance() {
 		Session session = factory.openSession();
 		return session;
 	}
