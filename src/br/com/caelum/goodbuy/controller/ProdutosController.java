@@ -24,10 +24,20 @@ public class ProdutosController {
 
 	public void adiciona(Produto produto) {
 		dao.salva(produto);
-		//result.redirectTo(ProdutosController.class).lista();
+		// result.redirectTo(ProdutosController.class).lista();
 		result.redirectTo(this).lista();
 	}
 
 	public void formulario() {
 	}
+
+	public Produto edita(Long id) {
+		return dao.carrega(id);
+	}
+
+	public void altera(Produto produto) {
+		dao.atualiza(produto);
+		result.redirectTo(this).lista();
+	}
+
 }
